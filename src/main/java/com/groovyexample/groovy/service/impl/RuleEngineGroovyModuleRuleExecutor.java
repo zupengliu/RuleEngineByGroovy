@@ -45,7 +45,7 @@ public class RuleEngineGroovyModuleRuleExecutor implements
       String scriptBuilder = groovyScriptTemplate.getScript("ScriptTemplate.groovy_template");
       String scriptClassName = RuleEngineGroovyModuleRuleExecutor.class.getSimpleName() + "_" + name;
       String fullScript = String.format(scriptBuilder, scriptClassName, script);
-
+      log.info("groovy编译路径：{}",fullScript);
       String oldMd5 = nameAndMd5.get(name);
       String newMd5 = MD5Utils.getStringMD5(fullScript);
       if (oldMd5 != null && oldMd5.equals(newMd5)) {
@@ -61,6 +61,8 @@ public class RuleEngineGroovyModuleRuleExecutor implements
       throw new RuntimeException(e);
     }
   }
+
+
 
 
 }

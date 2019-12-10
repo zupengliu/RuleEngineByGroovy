@@ -1,8 +1,10 @@
+package com.dymic
+
 import com.groovyexample.groovy.service.EngineGroovyModuleRule
 
-class %s implements EngineGroovyModuleRule{
+class TestGroovy implements EngineGroovyModuleRule{
     @Override
     Boolean run(Object context, Object result) {
-        %s //place holder
+        return null
     }
 }

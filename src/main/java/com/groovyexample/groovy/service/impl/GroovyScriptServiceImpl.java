@@ -1,34 +1,34 @@
 package com.groovyexample.groovy.service.impl;
 
-import com.groovyexample.groovy.bean.ScriptVariable;
 import com.groovyexample.groovy.bean.RuleEngineExecuteContext;
+import com.groovyexample.groovy.bean.ScriptVariable;
 import com.groovyexample.groovy.bean.StrategyScriptEntity;
 import com.groovyexample.groovy.service.EngineGroovyModuleRule;
 import com.groovyexample.groovy.service.GroovyScriptService;
 import com.groovyexample.groovy.service.StrategyScriptDataSouce;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Date;
+import java.util.List;
+
 @Slf4j
 @Service
 public class GroovyScriptServiceImpl implements GroovyScriptService, InitializingBean {
 
   @Autowired
-  private RuleEngineGroovyModuleRuleExecutor groovyModuleRuleExecutor;
-  @Autowired
+  private com.groovyexample.groovy.service.impl.RuleEngineGroovyModuleRuleExecutor groovyModuleRuleExecutor;
+  @Autowired(required = false)
   private StrategyScriptDataSouce strategyScriptDataSouce;
 
   @Override
   public void afterPropertiesSet() throws Exception {
-    log.info("collection-engine start loading valid script...");
+    /*log.info("collection-engine start loading valid script...");
     int count = loadValidScript(true);
-    log.info("collection-engine finish load {} script", count);
+    log.info("collection-engine finish load {} script", count);*/
   }
 
   @Override
@@ -98,8 +98,7 @@ public class GroovyScriptServiceImpl implements GroovyScriptService, Initializin
   @Override
   public int loadValidScript(boolean isInit) {
     //TODO add some filter to get right valid scripts
-    List<StrategyScriptEntity> scriptList = strategyScriptDataSouce.queryAll().parallelStream()
-      .collect(Collectors.toList());
+    List<StrategyScriptEntity> scriptList = null;//strategyScriptDataSouce.queryAll();
 
     if (CollectionUtils.isEmpty(scriptList)) {
       log.info("invalid script");
